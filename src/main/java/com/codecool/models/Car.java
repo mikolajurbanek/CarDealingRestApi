@@ -1,16 +1,16 @@
 package com.codecool.models;
 
 public class Car {
-    
-    private int id;
+
     private int year;
+    private int id;
     private boolean gearAutomat;
+    private int dealerID;
     private String model;
     private String color;
-    private int dealerID;
     private String brand;
 
-    public Car(int id, int year, boolean gearAutomat, String model, String color, int dealerID, String brand) {
+    public Car(int year, int id, boolean gearAutomat, int dealerID, String model, String color, String brand) {
         this.id = id;
         this.year = year;
         this.gearAutomat = gearAutomat;

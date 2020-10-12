@@ -1,6 +1,7 @@
 package com.codecool.servlets;
 
 import com.codecool.models.Car;
+import com.codecool.models.Stock;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import java.io.PrintWriter;
 @WebServlet(name = "CarServlet",  urlPatterns = {"/cars"})
 public class CarServlet extends HttpServlet {
 
+    Stock stock = new Stock();
+
     private Gson gson = new Gson();
 
 
@@ -23,7 +26,10 @@ public class CarServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Car car = new Car(1, 2004, true, "golf", "blue", 1, "VW");
+        for (Car car : stock.getCars()) {
+            System.out.println(car.getModel() + " is in " + car.getYear());
+        }
+        Car car = stock.getCars().get(1);
         String employeeJsonString = this.gson.toJson(car);
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
