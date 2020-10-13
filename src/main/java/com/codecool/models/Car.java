@@ -1,33 +1,34 @@
 package com.codecool.models;
-
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "cars")
-//@TypeDef(name = "hstore", typeClass = PostgreSQLHStoreType.class)
 public class Car {
 
-    private int year;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
-
-    private boolean automat_gear;
-    private int dealer_id;
+    @ManyToOne
+    @JoinColumn(name="dealer_id")
+    private Dealer dealer_id;
+    private int year;
     private String model;
-    private String color;
     private String brand;
+    private String color;
+    private boolean automat_gear;
+    @ManyToMany(mappedBy = "cars")
+    private Set<User> users = new HashSet<>();
 
-
-    public Car(int year, int id, boolean automat_gear, int dealer_id, String model, String color, String brand) {
+    public Car(int id, Dealer dealer_id, int year, String model, String brand, String color, boolean automat_gear) {
         this.id = id;
-        this.year = year;
-        this.automat_gear = automat_gear;
-        this.model = model;
-        this.color = color;
         this.dealer_id = dealer_id;
+        this.year = year;
+        this.model = model;
         this.brand = brand;
+        this.color = color;
+        this.automat_gear = automat_gear;
     }
 
     public Car() {
@@ -74,19 +75,27 @@ public class Car {
         this.color = color;
     }
 
-    public int getDealer_id() {
-        return dealer_id;
-    }
-
-    public void setDealer_id(int dealerID) {
-        this.dealer_id = dealerID;
-    }
-
     public String getBrand() {
         return brand;
     }
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Dealer getDealer() {
+        return dealer_id;
+    }
+
+    public void setDealer(Dealer dealer) {
+        this.dealer_id = dealer;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

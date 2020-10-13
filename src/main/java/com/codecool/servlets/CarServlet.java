@@ -3,7 +3,6 @@ package com.codecool.servlets;
 import com.codecool.models.Car;
 import com.codecool.models.Stock;
 import com.google.gson.Gson;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +18,12 @@ public class CarServlet extends HttpServlet {
 
     private Gson gson = new Gson();
 
-
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         for (Car car : stock.getCars()) {
             System.out.println(car.getModel() + " from " + car.getYear());
         }
@@ -36,8 +34,6 @@ public class CarServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         out.print(employeeJsonString);
         out.flush();
-
     }
-
 
 }
