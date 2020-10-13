@@ -1,23 +1,30 @@
 package com.codecool.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "cars")
 public class Car {
-
-    private int year;
+    @Id
+    @GeneratedValue
     private int id;
-    private boolean gearAutomat;
-    private int dealerID;
-    private String model;
-    private String color;
+    @ManyToOne
+    @JoinColumn(name = "dealer_id")
+    private Dealer dealer;
     private String brand;
+    private String model;
+    private int year;
+    private boolean gearAutomat;
+    private String color;
 
-    public Car(int year, int id, boolean gearAutomat, int dealerID, String model, String color, String brand) {
+    public Car(int id, Dealer dealer, String brand, String model, int year, boolean gearAutomat, String color) {
         this.id = id;
+        this.dealer = dealer;
+        this.brand = brand;
+        this.model = model;
         this.year = year;
         this.gearAutomat = gearAutomat;
-        this.model = model;
         this.color = color;
-        this.dealerID = dealerID;
-        this.brand = brand;
     }
 
     public int getId() {
@@ -28,20 +35,20 @@ public class Car {
         this.id = id;
     }
 
-    public int getYear() {
-        return year;
+    public Dealer getDealer() {
+        return dealer;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
     }
 
-    public boolean isGearID() {
-        return gearAutomat;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setGearID(boolean gearID) {
-        this.gearAutomat = gearID;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getModel() {
@@ -52,27 +59,27 @@ public class Car {
         this.model = model;
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public boolean isGearAutomat() {
+        return gearAutomat;
+    }
+
+    public void setGearAutomat(boolean gearAutomat) {
+        this.gearAutomat = gearAutomat;
+    }
+
     public String getColor() {
         return color;
     }
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public int getDealerID() {
-        return dealerID;
-    }
-
-    public void setDealerID(int dealerID) {
-        this.dealerID = dealerID;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 }

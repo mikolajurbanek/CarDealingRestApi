@@ -1,11 +1,20 @@
 package com.codecool.models;
 
-public class Dealer {
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "dealers")
+public class Dealer {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String location;
     private String phoneNumber;
+    @OneToMany(mappedBy = "dealer")
+    private List<Car> dealerCars = new ArrayList<>();
 
     public Dealer(int id, String name, String location, String phoneNumber) {
         this.id = id;
@@ -44,5 +53,13 @@ public class Dealer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Car> getDealerCars() {
+        return dealerCars;
+    }
+
+    public void setDealerCars(List<Car> dealerCars) {
+        this.dealerCars = dealerCars;
     }
 }
