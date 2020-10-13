@@ -8,8 +8,8 @@ import java.util.Set;
 public class Car {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @ManyToOne
     @JoinColumn(name="dealer_id")
     private Dealer dealer_id;
@@ -21,8 +21,8 @@ public class Car {
     @ManyToMany(mappedBy = "cars")
     private Set<User> users = new HashSet<>();
 
-    public Car(int id, Dealer dealer_id, int year, String model, String brand, String color, boolean automat_gear) {
-        this.id = id;
+    public Car(Dealer dealer_id, int year, String model, String brand, String color, boolean automat_gear) {
+//        this.id = id;
         this.dealer_id = dealer_id;
         this.year = year;
         this.model = model;
@@ -35,11 +35,11 @@ public class Car {
 
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

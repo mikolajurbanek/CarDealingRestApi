@@ -15,7 +15,7 @@ public class Stock {
 
 
     public List<Car> getCars() {
-        return em.createQuery("SELECT NEW Car(c.id, c.dealer_id, c.year, c.model, c.brand, c.color, c.automat_gear) " +
+        return em.createQuery("SELECT NEW Car(c.dealer_id, c.year, c.model, c.brand, c.color, c.automat_gear) " +
                 "FROM Car c", Car.class).getResultList();
     }
 

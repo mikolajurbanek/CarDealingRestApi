@@ -10,26 +10,30 @@ import java.util.Set;
 @Table(name = "car_dealers")
 public class Dealer {
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     private String location;
     private String phoneNumber;
     @OneToMany(mappedBy = "dealer_id")
     private List<Car> cars = new ArrayList<>();
 
-    public Dealer(int id, String name, String location, String phoneNumber) {
-        this.id = id;
+    public Dealer(){
+
+    }
+
+    public Dealer(String name, String location, String phoneNumber) {
+//        this.id = id;
         this.name = name;
         this.location = location;
         this.phoneNumber = phoneNumber;
     }
 
-    public int getID() {
+    public long getID() {
         return id;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.id = ID;
     }
 
