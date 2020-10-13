@@ -1,23 +1,37 @@
 package com.codecool.models;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "cars")
+//@TypeDef(name = "hstore", typeClass = PostgreSQLHStoreType.class)
 public class Car {
 
     private int year;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private boolean gearAutomat;
-    private int dealerID;
+
+    private boolean automat_gear;
+    private int dealer_id;
     private String model;
     private String color;
     private String brand;
 
-    public Car(int year, int id, boolean gearAutomat, int dealerID, String model, String color, String brand) {
+
+    public Car(int year, int id, boolean automat_gear, int dealer_id, String model, String color, String brand) {
         this.id = id;
         this.year = year;
-        this.gearAutomat = gearAutomat;
+        this.automat_gear = automat_gear;
         this.model = model;
         this.color = color;
-        this.dealerID = dealerID;
+        this.dealer_id = dealer_id;
         this.brand = brand;
+    }
+
+    public Car() {
+
     }
 
     public int getId() {
@@ -37,11 +51,11 @@ public class Car {
     }
 
     public boolean isGearID() {
-        return gearAutomat;
+        return automat_gear;
     }
 
     public void setGearID(boolean gearID) {
-        this.gearAutomat = gearID;
+        this.automat_gear = gearID;
     }
 
     public String getModel() {
@@ -60,12 +74,12 @@ public class Car {
         this.color = color;
     }
 
-    public int getDealerID() {
-        return dealerID;
+    public int getDealer_id() {
+        return dealer_id;
     }
 
-    public void setDealerID(int dealerID) {
-        this.dealerID = dealerID;
+    public void setDealer_id(int dealerID) {
+        this.dealer_id = dealerID;
     }
 
     public String getBrand() {

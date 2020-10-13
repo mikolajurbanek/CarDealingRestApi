@@ -27,9 +27,9 @@ public class CarServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         for (Car car : stock.getCars()) {
-            System.out.println(car.getModel() + " is in " + car.getYear());
+            System.out.println(car.getModel() + " from " + car.getYear());
         }
-        Car car = stock.getCars().get(1);
+        Car car = stock.getCars().get(0);
         String employeeJsonString = this.gson.toJson(car);
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
@@ -37,18 +37,6 @@ public class CarServlet extends HttpServlet {
         out.print(employeeJsonString);
         out.flush();
 
-//        out.println(
-//                "<html>\n" +
-//                        "<head><title>Web shop</title></head>\n" +
-//                        "<body>\n" +
-//                        "<h1>WEB MIKE'S BIKES STORE</h1>" +
-//                        (itemId == null ?
-//                                "<h3>No items added to cart yet</h3>" :
-//                                "<h3> " + stock.getItemByID(Integer.parseInt(itemId)).getName() + " just added to cart!</h3>") +
-//                        "<br/>" +
-//                        "<div>" + buffer.toString() + "</div>" +
-//                        "</body></html>"
-//        );
     }
 
 
