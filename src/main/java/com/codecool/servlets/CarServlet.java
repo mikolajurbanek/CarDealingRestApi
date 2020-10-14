@@ -2,6 +2,7 @@ package com.codecool.servlets;
 
 import com.codecool.models.Car;
 import com.codecool.models.Stock;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +17,6 @@ public class CarServlet extends HttpServlet {
 
     Stock stock = new Stock();
 
-    private Gson gson = new Gson();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -28,11 +27,11 @@ public class CarServlet extends HttpServlet {
             System.out.println(car.getModel() + " from " + car.getYear());
         }
         Car car = stock.getCars().get(0);
-        String employeeJsonString = this.gson.toJson(car);
+        ObjectMapper mapper = new ObjectMapper();
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print(employeeJsonString);
+        out.print(mapper.writeValueAsString(car));
         out.flush();
     }
 

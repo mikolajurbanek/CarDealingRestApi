@@ -1,5 +1,7 @@
 package com.codecool.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,6 +18,7 @@ public class Dealer {
     private String location;
     private String phoneNumber;
     @OneToMany(mappedBy = "dealer_id")
+    @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
     public Dealer(){

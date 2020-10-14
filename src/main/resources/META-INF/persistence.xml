@@ -10,7 +10,7 @@
         <class>com.codecool.models.User</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
-            <property name="hibernate.hbm2dll.auto" value="create-drop"/>
+<!--            <property name="hibernate.hbm2dll.auto" value="create-drop"/>-->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
@@ -23,6 +23,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cars"/>
             <property name="javax.persistence.jdbc.user" value="tomek"/>
             <property name="javax.persistence.jdbc.password" value="123"/>
+            <property name="javax.persistence.sql-load-script-source" value="src/main/resources/scripts/insert.sql"/>
         </properties>
     </persistence-unit>
 </persistence>
