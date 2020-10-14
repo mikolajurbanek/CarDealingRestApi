@@ -8,7 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JPAExample {
+public class App {
 
     public static void populateDb(EntityManager em) {
 
