@@ -1,9 +1,7 @@
 package com.codecool.servlets;
 
-import com.codecool.dao.CarDao;
-import com.codecool.models.Car;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.codecool.Services.Stock;
+import com.codecool.dao.DealerDao;
+import com.codecool.models.Dealer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,24 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "CarServlet",  urlPatterns = {"/cars", "/cars/*"})
-public class CarServlet extends HttpServlet {
+@WebServlet(name = "DealerServlet", urlPatterns = {"/dealers", "/dealers/*"})
+public class DealerServlet extends HttpServlet {
 
-    CarDao carDao = new CarDao();
+    DealerDao dealerDao = new DealerDao();
     ObjectMapper mapper = new ObjectMapper();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String form = request.getQueryString();
         Map<String, String> parsedMap = parseFormData(form);
-        String color = parsedMap.get("color");
-        String brand = parsedMap.get("brand");
-        String model = parsedMap.get("model");
-        int year = Integer.parseInt(parsedMap.get("year"));
-        boolean automat_gear = Boolean.parseBoolean(parsedMap.get("automat_gear"));
-        long id = Long.parseLong(parsedMap.get("dealer_id"));
-        carDao.addCar(id, model, brand, color, automat_gear, year);
+        System.out.println(form);
+        String name = parsedMap.get("name");
+        String location = parsedMap.get("location");
+        String phoneNumber = parsedMap.get("phone");
+        Dealer dealer = new Dealer(name, location, phoneNumber);
+        dealerDao.addDealer(dealer);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,11 +41,11 @@ public class CarServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         if(splitURL.size() == 3){
             long id = Long.parseLong(splitURL.get(2));
-            Car car = carDao.getCarById(id);
-            out.print(mapper.writeValueAsString(car));
+            Dealer dealer = dealerDao.getDealerById(id);
+            out.print(mapper.writeValueAsString(dealer));
         } else{
-            List<Car> cars =  carDao.getAllCars();
-            out.print(mapper.writeValueAsString(cars));
+            List<Dealer> dealers =  dealerDao.getAllDealers();
+            out.print(mapper.writeValueAsString(dealers));
         }
         out.flush();
 
@@ -55,7 +55,7 @@ public class CarServlet extends HttpServlet {
         List<String> splitURL = Arrays.asList(request.getRequestURI().split("/"));
         long id = Long.parseLong(splitURL.get(2));
         if(splitURL.size() == 3 && id != 0L){
-            carDao.deleteCar(id);
+            dealerDao.deleteDealer(id);
         } else{
             System.out.println("No such id in database");
         }
@@ -70,5 +70,4 @@ public class CarServlet extends HttpServlet {
         }
         return map;
     }
-
 }
