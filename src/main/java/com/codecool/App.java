@@ -1,5 +1,6 @@
 package com.codecool;
 
+import com.codecool.Services.Stock;
 import com.codecool.models.Car;
 import com.codecool.models.Dealer;
 
@@ -10,10 +11,10 @@ import javax.persistence.Persistence;
 
 public class App {
 
-    public static void populateDb(EntityManager em) {
+/*    public static void populateDb(EntityManager em) {
 
         Dealer dealer = new Dealer("Super Cars", "Warszawa", "123456789");
-        Car car = new Car(dealer, 2020, "Model 3", "Tesla", "Blue", true);
+        Car car = new Car(dealer, 2020, "UP!", "VW", "white", false);
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
@@ -21,10 +22,11 @@ public class App {
         em.persist(car);
         transaction.commit();
         System.out.println("\n### Car saved.\n");
-    }
+    }*/
 
     public static void main(String[] args) {
 
+/*
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("carsPU");
         EntityManager em = emf.createEntityManager();
 
@@ -39,6 +41,8 @@ public class App {
 
         em.close();
         emf.close();
-
+*/
+        Stock s = new Stock();
+        s.insertWithQuery();
     }
 }
