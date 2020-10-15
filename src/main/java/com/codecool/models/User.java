@@ -15,8 +15,8 @@ public class User {
     @ManyToMany(cascade = { CascadeType.ALL })
     private Set<Car> cars = new HashSet<>();
 
-    public User(long id, String name, String surname) {
-        this.id = id;
+    public User(String name, String surname) {
+//        this.id = id;
         this.name = name;
         this.surname = surname;
     }

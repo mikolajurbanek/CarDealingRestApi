@@ -5,7 +5,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "cars")
-public class Car {
+public class Car{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,10 @@ public class Car {
     @ManyToMany(mappedBy = "cars")
     private Set<User> users = new HashSet<>();
 
+    public Car() {
+
+    }
+
     public Car(Dealer dealer_id, int year, String model, String brand, String color, boolean automat_gear) {
 //        this.id = id;
         this.dealer_id = dealer_id;
@@ -29,10 +33,6 @@ public class Car {
         this.brand = brand;
         this.color = color;
         this.automat_gear = automat_gear;
-    }
-
-    public Car() {
-
     }
 
     public long getId() {
@@ -51,12 +51,12 @@ public class Car {
         this.year = year;
     }
 
-    public boolean isGearID() {
+    public boolean isAutomat_gear() {
         return automat_gear;
     }
 
-    public void setGearID(boolean gearID) {
-        this.automat_gear = gearID;
+    public void setAutomat_gear(boolean automat_gear) {
+        this.automat_gear = automat_gear;
     }
 
     public String getModel() {
@@ -83,12 +83,12 @@ public class Car {
         this.brand = brand;
     }
 
-    public Dealer getDealer() {
+    public Dealer getDealer_id() {
         return dealer_id;
     }
 
-    public void setDealer(Dealer dealer) {
-        this.dealer_id = dealer;
+    public void setDealer_id(Dealer dealer_id) {
+        this.dealer_id = dealer_id;
     }
 
     public Set<User> getUsers() {

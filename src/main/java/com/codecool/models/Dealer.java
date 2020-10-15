@@ -32,12 +32,12 @@ public class Dealer {
         this.phoneNumber = phoneNumber;
     }
 
-    public long getID() {
+    public long getId() {
         return id;
     }
 
-    public void setID(long ID) {
-        this.id = ID;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
