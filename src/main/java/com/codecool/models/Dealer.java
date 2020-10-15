@@ -1,12 +1,10 @@
 package com.codecool.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "car_dealers")
@@ -17,7 +15,7 @@ public class Dealer {
     private String name;
     private String location;
     private String phoneNumber;
-    @OneToMany(mappedBy = "dealer_id")
+    @OneToMany(mappedBy = "dealer_id", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
@@ -26,7 +24,6 @@ public class Dealer {
     }
 
     public Dealer(String name, String location, String phoneNumber) {
-//        this.id = id;
         this.name = name;
         this.location = location;
         this.phoneNumber = phoneNumber;

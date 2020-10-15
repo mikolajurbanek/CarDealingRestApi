@@ -2,7 +2,6 @@ package com.codecool.dao;
 
 import com.codecool.models.Car;
 import com.codecool.models.Dealer;
-
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,7 +13,7 @@ public class CarDao {
     EntityManager em = emf.createEntityManager();
     EntityTransaction transaction = em.getTransaction();
 
-    public List<Car> findAllCarsWithCriteriaQuery() {
+    public List<Car> getAllCars() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Car> cq = cb.createQuery(Car.class);
         Root<Car> rootEntry = cq.from(Car.class);
@@ -34,12 +33,16 @@ public class CarDao {
         transaction.commit();
     }
 
-    public void putCar(EntityManager em, long id, String model, String brand, String color, boolean automat_gear, int year) {
+    public void addCar(long id, String model, String brand, String color, boolean automat_gear, int year) {
         Dealer dealer = em.find(Dealer.class, id);
-        Car car = new Car(dealer, year, model, brand, color, automat_gear);
-        System.out.println("this is dealer " + dealer);
-        transaction.begin();
-        em.persist(car);
-        transaction.commit();
+        if(id == dealer.getId()){
+            Car car = new Car(dealer, year, model, brand, color, automat_gear);
+            System.out.println("this is dealer " + dealer);
+            transaction.begin();
+            em.persist(car);
+            transaction.commit();
+        }else {
+            System.out.println("No such dealer id in DB");
+        }
     }
 }

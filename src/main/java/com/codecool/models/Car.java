@@ -26,7 +26,6 @@ public class Car{
     }
 
     public Car(Dealer dealer_id, int year, String model, String brand, String color, boolean automat_gear) {
-//        this.id = id;
         this.dealer_id = dealer_id;
         this.year = year;
         this.model = model;
