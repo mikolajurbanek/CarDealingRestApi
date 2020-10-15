@@ -3,6 +3,8 @@ package com.codecool.servlets;
 import com.codecool.dao.CarDao;
 import com.codecool.models.Car;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.codecool.Services.Stock;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

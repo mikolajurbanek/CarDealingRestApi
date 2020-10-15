@@ -1,5 +1,6 @@
 package com.codecool;
 
+import com.codecool.Services.Stock;
 import com.codecool.models.Car;
 import com.codecool.models.Dealer;
 import com.codecool.models.User;
@@ -10,7 +11,7 @@ import javax.persistence.Persistence;
 
 public class App {
 
-    public static void populateDb(EntityManager em) {
+   public static void populateDb(EntityManager em) {
 
         Dealer dealer = new Dealer("Super Cars", "Warszawa", "123456789");
         Dealer dealer2 = new Dealer("Exclusive Cars", "Kraków", "177756789");
