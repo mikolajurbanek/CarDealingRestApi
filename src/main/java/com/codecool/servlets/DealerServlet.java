@@ -2,6 +2,7 @@ package com.codecool.servlets;
 
 import com.codecool.dao.DealerDao;
 import com.codecool.models.Dealer;
+import com.codecool.models.dto.DealerDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +43,13 @@ public class DealerServlet extends HttpServlet {
         if(splitURL.size() == 3){
             long id = Long.parseLong(splitURL.get(2));
             Dealer dealer = dealerDao.getDealerById(id);
-            out.print(mapper.writeValueAsString(dealer));
+            DealerDTO dealerDTO = new DealerDTO(
+                    dealer.getId(),
+                    dealer.getName(),
+                    dealer.getLocation(),
+                    dealer.getPhoneNumber()
+            );
+            out.print(mapper.writeValueAsString(dealerDTO));
         } else{
             List<Dealer> dealers =  dealerDao.getAllDealers();
             out.print(mapper.writeValueAsString(dealers));

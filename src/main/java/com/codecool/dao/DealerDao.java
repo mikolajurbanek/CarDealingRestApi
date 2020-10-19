@@ -1,6 +1,8 @@
 package com.codecool.dao;
 
 import com.codecool.models.Dealer;
+import com.codecool.models.dto.DealerDTO;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

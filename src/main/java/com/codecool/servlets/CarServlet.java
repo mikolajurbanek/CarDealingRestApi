@@ -1,6 +1,7 @@
 package com.codecool.servlets;
 
 import com.codecool.dao.CarDao;
+import com.codecool.exceptions.ObjectNotFoundException;
 import com.codecool.models.Car;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.codecool.Services.Stock;
@@ -28,9 +29,10 @@ public class CarServlet extends HttpServlet {
         String brand = parsedMap.get("brand");
         String model = parsedMap.get("model");
         int year = Integer.parseInt(parsedMap.get("year"));
-        boolean automat_gear = Boolean.parseBoolean(parsedMap.get("automat_gear"));
+        boolean automatGear = Boolean.parseBoolean(parsedMap.get("automat_gear"));
         long id = Long.parseLong(parsedMap.get("dealer_id"));
-        carDao.addCar(id, model, brand, color, automat_gear, year);
+
+        carDao.addCar(id, model, brand, color, automatGear, year);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,17 +50,16 @@ public class CarServlet extends HttpServlet {
             out.print(mapper.writeValueAsString(cars));
         }
         out.flush();
-
     }
 
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<String> splitURL = Arrays.asList(request.getRequestURI().split("/"));
         long id = Long.parseLong(splitURL.get(2));
-        if(splitURL.size() == 3 && id != 0L){
-            carDao.deleteCar(id);
-        } else{
-            System.out.println("No such id in database");
+        if(splitURL.size() != 3 && id == 0L){
+            throw new IOException("No such id in database");
         }
+
+        carDao.deleteCar(id);
     }
 
     public Map<String, String> parseFormData(String formData) throws UnsupportedEncodingException {

@@ -17,7 +17,8 @@ public class Car{
     private String model;
     private String brand;
     private String color;
-    private boolean automat_gear;
+    @Column(name="automat_gear")
+    private boolean automatGear;
     @ManyToMany(mappedBy = "cars")
     private Set<User> users = new HashSet<>();
 
@@ -25,13 +26,13 @@ public class Car{
 
     }
 
-    public Car(Dealer dealer_id, int year, String model, String brand, String color, boolean automat_gear) {
+    public Car(Dealer dealer_id, int year, String model, String brand, String color, boolean automatGear) {
         this.dealer_id = dealer_id;
         this.year = year;
         this.model = model;
         this.brand = brand;
         this.color = color;
-        this.automat_gear = automat_gear;
+        this.automatGear = automatGear;
     }
 
     public long getId() {
@@ -50,12 +51,12 @@ public class Car{
         this.year = year;
     }
 
-    public boolean isAutomat_gear() {
-        return automat_gear;
+    public boolean isAutomatGear() {
+        return automatGear;
     }
 
-    public void setAutomat_gear(boolean automat_gear) {
-        this.automat_gear = automat_gear;
+    public void setAutomatGear(boolean automat_gear) {
+        this.automatGear = automatGear;
     }
 
     public String getModel() {

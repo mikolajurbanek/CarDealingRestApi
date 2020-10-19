@@ -1,5 +1,6 @@
 package com.codecool.dao;
 
+import com.codecool.exceptions.ObjectNotFoundException;
 import com.codecool.models.Car;
 import com.codecool.models.Dealer;
 import javax.persistence.*;
@@ -33,16 +34,24 @@ public class CarDao {
         transaction.commit();
     }
 
-    public void addCar(long id, String model, String brand, String color, boolean automat_gear, int year) {
+    public void addCar(
+            long id,
+            String model,
+            String brand,
+            String color,
+            boolean automatGear,
+            int year
+    ) throws ObjectNotFoundException {
         Dealer dealer = em.find(Dealer.class, id);
-        if(id == dealer.getId()){
-            Car car = new Car(dealer, year, model, brand, color, automat_gear);
-            System.out.println("this is dealer " + dealer);
-            transaction.begin();
-            em.persist(car);
-            transaction.commit();
-        }else {
-            System.out.println("No such dealer id in DB");
+
+        if(id != dealer.getId()) {
+            throw new ObjectNotFoundException(Dealer.class.getSimpleName());
         }
+
+        Car car = new Car(dealer, year, model, brand, color, automatGear);
+        System.out.println("this is dealer " + dealer);
+        transaction.begin();
+        em.persist(car);
+        transaction.commit();
     }
 }
